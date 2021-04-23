@@ -1,11 +1,11 @@
 import socket
 
 target_host = 'localhost'
-target_port = "80"
-
-client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+target_port = 8000
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 client.connect((target_host,target_port))
-client.send('Eu sou client o novo, estou me conectando ao servidor!')
-response = client.recv(4096)
-print(response) 
+client.sendall(str.encode('Bom dia Carai!'))
+data = client.recv(1024)
+
+print ('Mensagem ecoada:', data.decode())
