@@ -13,21 +13,23 @@ conn, ender = server.accept()
 
 print('Conectado em', ender)
 
-
 while True:
     client = conn.recv(1024)
     if not client:      
         conn.close()        
         break
-
+    
+    if client.decode() == "-close":
+        conn.close()
+        print("cliente fechou conexão!!!")
+        break
     print (client.decode())
         
     msg = input('Digite Sua msg:')    
-    conn.sendall(str.encode(msg))
+    conn.sendall(str.encode(msg))   
     
-    #op = input("deseja fechar o app: ").upper()
-    conn.sendall(str.encode('deseja fechar o app:'))
-    client = conn.recv(1024)
-    if op == "S" or op == "SIM":
+    
+    if msg == "-close":        
         conn.close()
         break
+    
