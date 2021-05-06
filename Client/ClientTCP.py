@@ -7,17 +7,22 @@ client.connect((target_host,target_port))
 
 while True:
 
+
     msg = input('Digite Sua msg:') 
     client.sendall(str.encode(msg))
-    data = client.recv(1024)
+    data = client.recv(1024).decode()
+
+    if data == "-arquivo":
+        
 
     if msg == "-close": 
-        print ('Você fechou a conexão!!!')       
+        print ('Você fechou a conexão!!!') 
+        client.close() 
         break
 
-    if data.decode() == "-close":
+    if data == "-close":
         print("servidor encerrou conexão!!!")
         break
 
-    print ('Mensagem ecoada:', data.decode())
+    print (data)
 
