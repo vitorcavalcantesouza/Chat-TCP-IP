@@ -1,5 +1,6 @@
 import socket
 import threading
+import os
 
 bind_ip = 'localhost'
 bind_port = 50000
@@ -26,9 +27,10 @@ while True:
     
     if msg == "-arquivo":
         namefile = str(input("arquivo> "))
+        conn.send(namefile.encode())
         with open(namefile, 'rb') as file:
             for data in file.readlines():
-                connection.send(data)
+                conn.send(data)
         
         print("arquivo enviado!!!")        
     
